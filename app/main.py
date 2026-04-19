@@ -1,15 +1,19 @@
 class Animal:
     hidden = False
     alive = []
-    def __init__(self, name:str, health: int = 100) -> None:
+
+    def __init__(self, name: str, health: int = 100) -> None:
         self.name = name
         self.health = health
         Animal.alive.append(self)
-        ''
-    def __repr__(self) -> str:
-        return f"{{Name: {self.name}, Health: {self.health}, Hidden: {self.hidden}}}"
-class Herbivore(Animal):
 
+    def __repr__(self) -> str:
+        return (f"{{Name: {self.name},"
+                f" Health: {self.health},"
+                f" Hidden: {self.hidden}}}")
+
+
+class Herbivore(Animal):
 
     def hide(self) -> None:
         if self.hidden:
@@ -17,12 +21,13 @@ class Herbivore(Animal):
         elif not self.hidden:
             self.hidden = True
 
+
 class Carnivore(Animal):
 
     @staticmethod
-    def bite(object: Animal) -> None:
-        if isinstance(object, Herbivore):
-            if not object.hidden:
-                object.health -=50
-                if object.health <= 0:
-                    Animal.alive.remove(object)
+    def bite(obj: Animal) -> None:
+        if isinstance(obj, Herbivore):
+            if not obj.hidden:
+                obj.health -= 50
+                if obj.health <= 0:
+                    Animal.alive.remove(obj)
